@@ -1,13 +1,15 @@
 package ru.dpastukhov.creaturemom.view.viewmodel
 
-import android.graphics.drawable.Drawable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.dpastukhov.creaturemom.model.*
+import ru.dpastukhov.creaturemom.model.AttributeStore
+import ru.dpastukhov.creaturemom.model.AttributeType
+import ru.dpastukhov.creaturemom.model.Creature
+import ru.dpastukhov.creaturemom.model.CreatureAttributes
+import ru.dpastukhov.creaturemom.model.CreatureGenerator
 
-class CreatureViewModel(private val generator: CreatureGenerator = CreatureGenerator()) :
-    ViewModel() {
+class CreatureViewModel(private val generator: CreatureGenerator = CreatureGenerator()) : ViewModel() {
 
     private val creatureLiveData = MutableLiveData<Creature>()
 
