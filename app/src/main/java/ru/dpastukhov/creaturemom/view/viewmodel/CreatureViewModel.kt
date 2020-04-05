@@ -3,13 +3,11 @@ package ru.dpastukhov.creaturemom.view.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.dpastukhov.creaturemom.model.AttributeStore
-import ru.dpastukhov.creaturemom.model.AttributeType
-import ru.dpastukhov.creaturemom.model.Creature
-import ru.dpastukhov.creaturemom.model.CreatureAttributes
-import ru.dpastukhov.creaturemom.model.CreatureGenerator
+import ru.dpastukhov.creaturemom.model.*
+import ru.dpastukhov.creaturemom.model.room.RoomRepository
 
-class CreatureViewModel(private val generator: CreatureGenerator = CreatureGenerator()) : ViewModel() {
+class CreatureViewModel(private val generator: CreatureGenerator = CreatureGenerator(),
+                        private val repository: CreatureRepository = RoomRepository()) : ViewModel() {
 
     private val creatureLiveData = MutableLiveData<Creature>()
 
@@ -42,4 +40,15 @@ class CreatureViewModel(private val generator: CreatureGenerator = CreatureGener
         this.drawable = drawable
         updateCreature()
     }
+
+    fun saveCreature(): Boolean {
+        return if (canSaveCreature()) {
+            repository.saveCreature(creature)
+            true
+        } else {
+            false
+        }
+    }
+
+    fun canSaveCreature() = intelligence != 0 && strength != 0 && endurance != 0 && name.isNotEmpty() && drawable != 0
 }

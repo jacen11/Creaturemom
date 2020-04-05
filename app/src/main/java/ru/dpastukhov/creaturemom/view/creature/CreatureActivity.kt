@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -84,16 +85,21 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
     })
   }
 
-  private fun configureClickListeners() {
-    avatarImageView.setOnClickListener {
-      val bottomDialogFragment = AvatarBottomDialogFragment.newInstance()
-      bottomDialogFragment.show(supportFragmentManager, "AvatarBottomDialogFragment")
-    }
+    private fun configureClickListeners() {
+        avatarImageView.setOnClickListener {
+            val bottomDialogFragment = AvatarBottomDialogFragment.newInstance()
+            bottomDialogFragment.show(supportFragmentManager, "AvatarBottomDialogFragment")
+        }
 
-    saveButton.setOnClickListener {
-      // TODO: handle save button clicked
+        saveButton.setOnClickListener {
+            if (viewModel.saveCreature()) {
+                Toast.makeText(this, getString(R.string.creature_saved), Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(this, getString(R.string.error_saving_creature), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
-  }
 
   private fun configureLiveDataObservers(){
     viewModel.getCreatureLiveData().observe(this, Observer { creature ->

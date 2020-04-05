@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations
 import ru.dpastukhov.creaturemom.model.Creature
 import ru.dpastukhov.creaturemom.model.CreatureAttributes
 import ru.dpastukhov.creaturemom.model.CreatureGenerator
+import ru.dpastukhov.creaturemom.model.CreatureRepository
 
 class CreatureViewModelTest {
     private lateinit var creatureViewModel: CreatureViewModel
@@ -22,10 +23,13 @@ class CreatureViewModelTest {
     @Mock
     lateinit var mockGenerator: CreatureGenerator
 
+    @Mock
+    lateinit var repository: CreatureRepository
+
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
-        creatureViewModel = CreatureViewModel(mockGenerator)
+        creatureViewModel = CreatureViewModel(mockGenerator, repository)
     }
 
     @Test
@@ -43,5 +47,34 @@ class CreatureViewModelTest {
 
         assertEquals(stubCreature, creatureViewModel.creature)
     }
+
+    @Test
+    fun testCantSaveCreatureWithBlankName() {
+        creatureViewModel.apply {
+            intelligence = 10
+            strength = 3
+            endurance = 7
+            drawable = 1
+            name = ""
+        }
+
+        val canSaveCreature = creatureViewModel.canSaveCreature()
+        assertEquals(false, canSaveCreature)
+    }
+
+    @Test
+    fun testCantSaveCreatureWithoutStrength() {
+        creatureViewModel.apply {
+            intelligence = 10
+            strength = 0
+            endurance = 7
+            drawable = 1
+            name = "Test"
+        }
+
+        val canSaveCreature = creatureViewModel.canSaveCreature()
+        assertEquals(false, canSaveCreature)
+    }
+
 
 }
