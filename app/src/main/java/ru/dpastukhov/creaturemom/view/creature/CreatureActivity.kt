@@ -47,11 +47,11 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
 
   private fun configureSpinnerAdapters() {
     intelligence.adapter = ArrayAdapter<AttributeValue>(this,
-        android.R.layout.simple_spinner_dropdown_item, AttributeStore.INTELLIGENCE)
+      android.R.layout.simple_spinner_dropdown_item, AttributeStore.INTELLIGENCE)
     strength.adapter = ArrayAdapter<AttributeValue>(this,
-        android.R.layout.simple_spinner_dropdown_item, AttributeStore.STRENGTH)
+      android.R.layout.simple_spinner_dropdown_item, AttributeStore.STRENGTH)
     endurance.adapter = ArrayAdapter<AttributeValue>(this,
-        android.R.layout.simple_spinner_dropdown_item, AttributeStore.ENDURANCE)
+      android.R.layout.simple_spinner_dropdown_item, AttributeStore.ENDURANCE)
   }
 
   private fun configureSpinnerListeners() {
@@ -70,6 +70,7 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
     endurance.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         viewModel.attributeSelected(AttributeType.ENDURANCE, position)
+
       }
       override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
@@ -80,28 +81,28 @@ class CreatureActivity : AppCompatActivity(), AvatarAdapter.AvatarListener {
       override fun afterTextChanged(s: Editable?) {}
       override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
       override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-       viewModel.name = s.toString()
+        viewModel.name = s.toString()
       }
     })
   }
 
-    private fun configureClickListeners() {
-        avatarImageView.setOnClickListener {
-            val bottomDialogFragment = AvatarBottomDialogFragment.newInstance()
-            bottomDialogFragment.show(supportFragmentManager, "AvatarBottomDialogFragment")
-        }
-
-        saveButton.setOnClickListener {
-            if (viewModel.saveCreature()) {
-                Toast.makeText(this, getString(R.string.creature_saved), Toast.LENGTH_SHORT).show()
-                finish()
-            } else {
-                Toast.makeText(this, getString(R.string.error_saving_creature), Toast.LENGTH_SHORT).show()
-            }
-        }
+  private fun configureClickListeners() {
+    avatarImageView.setOnClickListener {
+      val bottomDialogFragment = AvatarBottomDialogFragment.newInstance()
+      bottomDialogFragment.show(supportFragmentManager, "AvatarBottomDialogFragment")
     }
 
-  private fun configureLiveDataObservers(){
+    saveButton.setOnClickListener {
+      if (viewModel.saveCreature()) {
+        Toast.makeText(this, getString(R.string.creature_saved), Toast.LENGTH_SHORT).show()
+        finish()
+      } else {
+        Toast.makeText(this, getString(R.string.error_saving_creature), Toast.LENGTH_SHORT).show()
+      }
+    }
+  }
+
+  private fun configureLiveDataObservers() {
     viewModel.getCreatureLiveData().observe(this, Observer { creature ->
       creature?.let {
         hitPoints.text = creature.hitPoints.toString()

@@ -12,7 +12,6 @@ class CreatureViewModel(private val generator: CreatureGenerator = CreatureGener
     private val creatureLiveData = MutableLiveData<Creature>()
 
     fun getCreatureLiveData(): LiveData<Creature> = creatureLiveData
-
     var name = ""
     var intelligence = 0
     var strength = 0
@@ -29,9 +28,12 @@ class CreatureViewModel(private val generator: CreatureGenerator = CreatureGener
 
     fun attributeSelected(attributeType: AttributeType, position: Int) {
         when (attributeType) {
-            AttributeType.INTELLIGENCE -> intelligence = AttributeStore.INTELLIGENCE[position].value
-            AttributeType.STRENGTH -> strength = AttributeStore.STRENGTH[position].value
-            AttributeType.ENDURANCE -> endurance = AttributeStore.ENDURANCE[position].value
+            AttributeType.INTELLIGENCE ->
+                intelligence = AttributeStore.INTELLIGENCE[position].value
+            AttributeType.STRENGTH ->
+                strength = AttributeStore.STRENGTH[position].value
+            AttributeType.ENDURANCE ->
+                endurance = AttributeStore.ENDURANCE[position].value
         }
         updateCreature()
     }

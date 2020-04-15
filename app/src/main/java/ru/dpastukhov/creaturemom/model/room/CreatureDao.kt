@@ -7,12 +7,13 @@ import ru.dpastukhov.creaturemom.model.Creature
 
 @Dao
 interface CreatureDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(creature: Creature)
 
     @Delete
-    fun clearCreature(vararg creature: Creature)
+    fun clearCreatures(vararg creature: Creature)
 
-    @Query("select * from creature_table order by name desc")
+    @Query("SELECT * FROM creature_table ORDER BY name ASC")
     fun getAllCreatures(): LiveData<List<Creature>>
 }
