@@ -75,6 +75,4 @@ class CreatureViewModelTest {
         val canSaveCreature = creatureViewModel.canSaveCreature()
         assertEquals(false, canSaveCreature)
     }
-
-
 }
