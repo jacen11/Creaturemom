@@ -1,4 +1,3 @@
-
 package ru.dpastukhov.creaturemom.model.room
 
 import android.os.AsyncTask
@@ -16,19 +15,17 @@ class RoomRepository : CreatureRepository {
         allCreatures = creatureDao.getAllCreatures()
     }
 
-    private class InsertAsyncTask internal constructor(private val dao: CreatureDao) :
-        AsyncTask<Creature, Void, Void>() {
+    private class InsertAsyncTask internal constructor(private val dao: CreatureDao) : AsyncTask<Creature, Void, Void>() {
         override fun doInBackground(vararg params: Creature): Void? {
-           dao.insert(params[0])
-          return null
+            dao.insert(params[0])
+            return null
         }
     }
 
-    private class DeleteAsyncTask internal constructor(private val dao: CreatureDao) :
-        AsyncTask<Creature, Void, Void>() {
+    private class DeleteAsyncTask internal constructor(private val dao: CreatureDao) : AsyncTask<Creature, Void, Void>() {
         override fun doInBackground(vararg params: Creature): Void? {
-          dao.clearCreatures(*params)
-          return null
+            dao.clearCreatures(*params)
+            return null
         }
     }
 
