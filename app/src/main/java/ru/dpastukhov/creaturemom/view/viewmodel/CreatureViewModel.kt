@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import ru.dpastukhov.creaturemom.model.*
 import ru.dpastukhov.creaturemom.model.room.RoomRepository
 
-class CreatureViewModel(private val generator: CreatureGenerator = CreatureGenerator(),
-                        private val repository: CreatureRepository = RoomRepository()) : ViewModel() {
+class CreatureViewModel(
+    private val generator: CreatureGenerator = CreatureGenerator(),
+    private val repository: CreatureRepository = RoomRepository()
+) : ViewModel() {
 
     private val creatureLiveData = MutableLiveData<Creature>()
 
@@ -28,12 +30,9 @@ class CreatureViewModel(private val generator: CreatureGenerator = CreatureGener
 
     fun attributeSelected(attributeType: AttributeType, position: Int) {
         when (attributeType) {
-            AttributeType.INTELLIGENCE ->
-                intelligence = AttributeStore.INTELLIGENCE[position].value
-            AttributeType.STRENGTH ->
-                strength = AttributeStore.STRENGTH[position].value
-            AttributeType.ENDURANCE ->
-                endurance = AttributeStore.ENDURANCE[position].value
+            AttributeType.INTELLIGENCE -> intelligence = AttributeStore.INTELLIGENCE[position].value
+            AttributeType.STRENGTH -> strength = AttributeStore.STRENGTH[position].value
+            AttributeType.ENDURANCE -> endurance = AttributeStore.ENDURANCE[position].value
         }
         updateCreature()
     }
@@ -52,5 +51,6 @@ class CreatureViewModel(private val generator: CreatureGenerator = CreatureGener
         }
     }
 
-    fun canSaveCreature() = intelligence != 0 && strength != 0 && endurance != 0 && name.isNotEmpty() && drawable != 0
+    fun canSaveCreature() =
+        intelligence != 0 && strength != 0 && endurance != 0 && name.isNotEmpty() && drawable != 0
 }

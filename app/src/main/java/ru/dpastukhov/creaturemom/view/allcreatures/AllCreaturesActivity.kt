@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_all_creatures.*
 import kotlinx.android.synthetic.main.content_all_creatures.*
 import ru.dpastukhov.creaturemom.R
 import ru.dpastukhov.creaturemom.view.creature.CreatureActivity
-import androidx.lifecycle.ViewModelProviders
 import ru.dpastukhov.creaturemom.view.viewmodel.AllCreaturesViewModel
 
 class AllCreaturesActivity : AppCompatActivity() {
@@ -27,7 +25,7 @@ class AllCreaturesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_all_creatures)
         setSupportActionBar(toolbar)
 
-        viewModel = ViewModelProviders.of(this).get(AllCreaturesViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(AllCreaturesViewModel::class.java)
 
         creaturesRecyclerView.layoutManager = LinearLayoutManager(this)
         creaturesRecyclerView.adapter = adapter
@@ -42,7 +40,6 @@ class AllCreaturesActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }

@@ -11,8 +11,7 @@ import ru.dpastukhov.creaturemom.app.inflate
 import ru.dpastukhov.creaturemom.R
 import ru.dpastukhov.creaturemom.model.Creature
 
-class CreatureAdapter(private val creatures: MutableList<Creature>)
-    : RecyclerView.Adapter<CreatureAdapter.ViewHolder>() {
+class CreatureAdapter(private val creatures: MutableList<Creature>) : RecyclerView.Adapter<CreatureAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(parent.inflate(R.layout.list_item_creature))

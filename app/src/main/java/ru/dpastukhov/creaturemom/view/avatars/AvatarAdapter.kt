@@ -24,8 +24,7 @@ class AvatarAdapter(private val avatars: List<Avatar>, private val listener: Ava
         holder.bind(avatars[position])
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        View.OnClickListener {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
         private lateinit var avatar: Avatar
 
