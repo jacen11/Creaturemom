@@ -18,42 +18,42 @@ import ru.dpastukhov.creaturemom.view.viewmodel.AllCreaturesViewModel
 
 class AllCreaturesActivity : AppCompatActivity() {
 
-  private lateinit var viewModel: AllCreaturesViewModel
+    private lateinit var viewModel: AllCreaturesViewModel
 
-  private val adapter = CreatureAdapter(mutableListOf())
+    private val adapter = CreatureAdapter(mutableListOf())
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_all_creatures)
-    setSupportActionBar(toolbar)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_all_creatures)
+        setSupportActionBar(toolbar)
 
-    viewModel = ViewModelProviders.of(this).get(AllCreaturesViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(AllCreaturesViewModel::class.java)
 
-    creaturesRecyclerView.layoutManager = LinearLayoutManager(this)
-    creaturesRecyclerView.adapter = adapter
+        creaturesRecyclerView.layoutManager = LinearLayoutManager(this)
+        creaturesRecyclerView.adapter = adapter
 
-    viewModel.getAllCreaturesLiveData().observe(this, Observer { creatures ->
-      creatures?.let { adapter.updateCreatures(creatures) }
-    })
+        viewModel.getAllCreaturesLiveData().observe(this, Observer { creatures ->
+            creatures?.let { adapter.updateCreatures(creatures) }
+        })
 
-    fab.setOnClickListener {
-      startActivity(Intent(this, CreatureActivity::class.java))
+        fab.setOnClickListener {
+            startActivity(Intent(this, CreatureActivity::class.java))
+        }
     }
-  }
 
-  override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    menuInflater.inflate(R.menu.menu_main, menu)
-    return true
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    return when (item.itemId) {
-      R.id.action_clear_all -> {
-        viewModel.clearAllCreatures()
-        true
-      }
-      else -> super.onOptionsItemSelected(item)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
     }
-  }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_clear_all -> {
+                viewModel.clearAllCreatures()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
