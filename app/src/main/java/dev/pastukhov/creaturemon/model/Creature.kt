@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey
 data class Creature(
         val attributes: CreatureAttributes = CreatureAttributes(),
         val hitPoints: Int = 0,
+        //TODO ключ на айдишник переделать
         @PrimaryKey @NonNull val name: String,
         val drawable: Int = 0
 )
